@@ -1748,6 +1748,12 @@ namespace ImGuizmo
             delta = axisValue * lengthOnAxis;
          }
 
+         // [IGE] 2 axises constraint
+         if (gContext.mCurrentOperation == MOVE_YZ) delta[0] = 0.f;
+         if (gContext.mCurrentOperation == MOVE_ZX) delta[1] = 0.f;
+         if (gContext.mCurrentOperation == MOVE_XY) delta[2] = 0.f;
+         // [/IGE]
+
          // snap
          if (snap)
          {
