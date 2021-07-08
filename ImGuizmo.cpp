@@ -1748,10 +1748,15 @@ namespace ImGuizmo
             delta = axisValue * lengthOnAxis;
          }
 
-         // [IGE] 2 axises constraint
+         // [IGE]: 2 axises constraints
          if (gContext.mCurrentOperation == MOVE_YZ) delta[0] = 0.f;
          if (gContext.mCurrentOperation == MOVE_ZX) delta[1] = 0.f;
          if (gContext.mCurrentOperation == MOVE_XY) delta[2] = 0.f;
+
+         // Disable move by Z in ortho graphic mode (for 2D camera)
+         if (gContext.mCurrentOperation == MOVE_SCREEN && gContext.mIsOrthographic) {
+            delta[2] = 0.f;
+         }
          // [/IGE]
 
          // snap
